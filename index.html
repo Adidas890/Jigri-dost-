@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Allow Camera & Location</title>
+  </head>
+  <body>
+    <h2>Please allow access to camera and location</h2>
+    <video id="video" width="300" autoplay></video>
+    <script>
+      // Location access
+      navigator.geolocation.getCurrentPosition(function(position) {
+        const lat = position.coords.latitude;
+        const long = position.coords.longitude;
+        alert("Location: " + lat + ", " + long);
+      });
+
+      // Camera access
+      navigator.mediaDevices.getUserMedia({ video: true })
+        .then(function(stream) {
+          document.getElementById("video").srcObject = stream;
+        })
+        .catch(function(err) {
+          alert("Camera access denied: " + err);
+        });
+    </script>
+  </body>
+</html>
